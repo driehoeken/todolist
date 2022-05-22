@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8">
+        <script src="main.js" defer></script>
+
+        <!--font-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+        <!--icons-->
+        <script src="https://kit.fontawesome.com/06fd0b3ce5.js" crossorigin="anonymous"></script>
+
+    </head>
+    <body class="">
+        <div class="transparent-black off"></div>
+        <div class="box off">
+            <p class="box-header">Add task</p>
+            <p class="box-close"><i class="fa-solid fa-x"></i></p>
+            <label for="input-name">Name:</label>
+            <input type="text" id="input-name">
+            <label for="input-name">Color:</label>
+            <input type="color" id="input-color">
+            <label for="input-desc">Description:</label>
+            <input type="text" id='input-desc'>
+            <label for="input-date">Choose an end date</label>
+            <input type="date" id="input-date">
+            <label for="status">Choose a status:</label>
+
+            <select id="status">
+                <option value="toDo">To do</option>
+                <option value="doing">Doing</option>
+                <option value="done">Done</option>
+            </select>
+            <button class="box-confirm">Add task</button>
+        </div>
+        <div id="main-container">
+            <nav>
+                <h1>Welcome!</h1>
+                <button class="nav-add-task add-task">Add task <i class="fa-solid fa-plus"></i></button>
+            </nav>
+            <div id="columns-container">
+                <div class="column">
+                    <div class="column-top">
+                        <p class="column-title">To do</p>
+                        <button class="column-top-add-task add-task"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                    <div class="tasks" id="toDo">
+                        
+                    </div>
+                    <button class="column-add-task add-task">Add task <i class="fa-solid fa-plus"></i></button>
+                </div>
+                <div class="column">
+                    <div class="column-top">
+                        <p class="column-title">Doing</p>
+                        
+                        <button class="column-top-add-task add-task"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                    <div class="tasks" id="doing">
+
+                    </div>
+                    <button class="column-add-task add-task">Add task <i class="fa-solid fa-plus"></i></button>
+                </div>
+                <div class="column">
+                    <div class="column-top">
+                        <p class="column-title">Done</p>
+
+                        <button class="column-top-add-task add-task"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                    <div class="tasks" id="done">
+
+                    </div>
+                    <button class="column-add-task add-task">Add task <i class="fa-solid fa-plus"></i></button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
