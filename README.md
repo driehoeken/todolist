@@ -5,10 +5,10 @@ Really early version
 ### Available features:
 - adding tasks
 - editing tasks
-
+- removing tasks
 ### Things I'm planning to add:
 - dark mode
 - responsiveness
-- removing tasks
 - drag and drop
+- saving tasks
 - adding task without a date or desc and showing error message when name is missing

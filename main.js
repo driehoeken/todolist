@@ -68,6 +68,7 @@ const renderTasks = function(){
             <div class='task-top'>
                 <p class="task-title">${task.name}</p>
                 <button class="task-edit"><i class="fa-solid fa-pen"></i></button>
+                <button class="task-remove"><i class="fa-solid fa-trash"></i></button>
             </div>
             <div class="task-color" style="background-color: ${task.color};"></div>
             <div class="task-bottom">
@@ -117,6 +118,31 @@ const hideBox = function(){
 
 }
 
+const getTask = function(e){
+    //getting id and status of clicked task
+    const task = e.target.closest('.task');
+    const tasks = e.target.closest('.tasks');
+
+    return {id: [...tasks.children].indexOf(task), status: tasks.id};
+}
+
+const removeTask = function(e){
+    if(e.target.closest('.task-remove')){
+        const task = getTask(e);
+        tasks[task.status].splice(task.id, 1);
+        renderTasks();
+    }
+}
+
+const editTask = function(e){
+    if(e.target.closest('.task-edit')){
+        const task = getTask(e);
+        editedId = task.id;
+        editedStatus = task.status;
+        showBox(true);
+    }
+}
+
 addTasks.forEach((button) => {
     button.addEventListener('click', (e) => {
         //setting status value in box when clicked addTask btn in column
@@ -153,16 +179,7 @@ boxConfirm.addEventListener('click', () => {
     hideBox();
 });
 
-columnsContainer.addEventListener('click', (event) => {
-    if(event.target.closest('.task-edit')){
-        //setting id and status of edited task in order to use it later
-        const task = event.target.closest('.task');
-        const tasks = event.target.closest('.tasks');
-
-        editedId = [...tasks.children].indexOf(task);
-        editedStatus = tasks.id;
-        showBox(true);
-    }
-});
+columnsContainer.addEventListener('click', editTask);
+columnsContainer.addEventListener('click', removeTask);
 
 renderTasks();
