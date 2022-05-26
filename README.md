@@ -6,9 +6,9 @@ Really early version
 - adding tasks
 - editing tasks
 - removing tasks
+- saving tasks in localStorage
 ### Things I'm planning to add:
 - dark mode
 - responsiveness
 - drag and drop
-- saving tasks
 - adding task without a date or desc and showing error message when name is missing

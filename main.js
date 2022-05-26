@@ -77,6 +77,8 @@ const renderTasks = function(){
             document.querySelector(`#${status}`).appendChild(taskDiv);
         });
     });
+    //saving tasks in localStorage every time they are rendered
+    localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
 const showBox = function(isEdit){
@@ -103,7 +105,7 @@ const showBox = function(isEdit){
 const hideBox = function(){
     body.classList.remove('overflow-hidden');
     transparent.classList = 'transparent-black off';
-    //if box was used to edit a task its values will be set to basic
+    //if the box was used to edit a task its values will be set to basic
     if(box.classList.contains('edit')){
         boxConfirm.textContent = 'Add task';
         document.querySelector('.box-header').textContent = 'Add task';
@@ -137,6 +139,8 @@ const removeTask = function(e){
 const editTask = function(e){
     if(e.target.closest('.task-edit')){
         const task = getTask(e);
+
+        //setting editedId and editetStatus to load tasks' values in box
         editedId = task.id;
         editedStatus = task.status;
         showBox(true);
@@ -169,7 +173,7 @@ boxConfirm.addEventListener('click', () => {
         taskToEdit.color = inputColor.value;
         taskToEdit.desc = inputDesc.value;
         taskToEdit.date = date;
-        //if status has changed, it will push task to the new list and remove from the old one
+        //if status has changed, it will push task to the new array and remove from the old one
         if(editedStatus !== inputStatus.value){
             tasks[inputStatus.value].push(taskToEdit);
             tasks[editedStatus].splice(tasks[editedStatus].indexOf(taskToEdit), 1);
@@ -181,5 +185,8 @@ boxConfirm.addEventListener('click', () => {
 
 columnsContainer.addEventListener('click', editTask);
 columnsContainer.addEventListener('click', removeTask);
-
+//loading tasks from local storage if they exist
+if(localStorage.getItem('tasks') !== null){
+    tasks = JSON.parse(localStorage.getItem('tasks'));
+}
 renderTasks();
