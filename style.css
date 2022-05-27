@@ -88,6 +88,12 @@ label{
 .box-close:hover{
     transform: scale(1.2);
 }
+#box-error{
+    text-align: center;
+    color: rgb(231 30 30);
+    font-weight: bold;
+    font-size: 20px;
+}
 /*Columns*/
 #columns-container{
     display: grid;
@@ -170,6 +176,7 @@ label{
     cursor: pointer;
     transition: all 0.1s ease-in-out;
 }
+
 
 .flex-center{
     display: flex;

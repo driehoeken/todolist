@@ -11,4 +11,3 @@ Really early version
 ### Things I'm planning to add:
 - dark mode
 - drag and drop
-- adding task without a date or desc and showing error message when name is missing

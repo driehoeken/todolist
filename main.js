@@ -38,6 +38,7 @@ const inputDesc = document.querySelector('#input-desc');
 const inputDate = document.querySelector('#input-date');
 const inputStatus = document.querySelector('#status');
 const columnsContainer = document.querySelector('#columns-container');
+const boxError = document.querySelector('#box-error');
 
 const statuses = ['toDo', 'doing', 'done'];
 
@@ -165,6 +166,16 @@ boxConfirm.addEventListener('click', () => {
     //converting date from yyyy-mm-dd to dd.mm.yyyy so we can set calendar input
     let date = inputDate.value.split('-');
     date = `${date[2]}.${date[1]}.${date[0].slice(-2)}`;
+
+    //if date is not defined
+    if(inputDate.value === ''){
+        date = '';
+    }
+    //if name is not defined
+    if(inputName.value === ''){
+        boxError.textContent = 'Set name of your task!';
+        return;
+    }
     //if box is not used to edit, new task will be added
     if(!box.classList.contains('edit')){
         addTask(inputName.value, inputColor.value, inputDesc.value, date, inputStatus.value);
@@ -183,6 +194,7 @@ boxConfirm.addEventListener('click', () => {
         }
         renderTasks();
     }
+    boxError.textContent = '';
     hideBox();
 });
 
