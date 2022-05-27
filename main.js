@@ -95,6 +95,7 @@ const showBox = function(isEdit){
         inputColor.value = editedTask.color;
         inputDesc.value = editedTask.desc;
 
+        //converting date from dd.mm.yyyy to yyyy-mm-dd so we can set calendar input
         let date = editedTask.date.split('.');
         date = `20${date[2]}-${date[1]}-${date[0]}`;
         inputDate.value = date;
@@ -160,6 +161,8 @@ addTasks.forEach((button) => {
 transparent.addEventListener('click', hideBox);
 boxClose.addEventListener('click', hideBox);
 boxConfirm.addEventListener('click', () => {
+
+    //converting date from yyyy-mm-dd to dd.mm.yyyy so we can set calendar input
     let date = inputDate.value.split('-');
     date = `${date[2]}.${date[1]}.${date[0].slice(-2)}`;
     //if box is not used to edit, new task will be added

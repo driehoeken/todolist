@@ -7,8 +7,8 @@ Really early version
 - editing tasks
 - removing tasks
 - saving tasks in localStorage
+- responsiveness
 ### Things I'm planning to add:
 - dark mode
-- responsiveness
 - drag and drop
 - adding task without a date or desc and showing error message when name is missing
