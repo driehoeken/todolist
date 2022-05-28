@@ -4,8 +4,19 @@
     --box-border-color: #f1f1f1;
     --button-bg: #dddddd;
     --button-bg-hover: #b1b1b1;
-    --button-border: #919191;
+    --button-border-color: #919191;
     --error-color: #e71e1e;
+    --input-border-color: #5f5f5f;
+}
+.dark-theme{
+    --main-bg-color: #0f0f0f;
+    --main-text-color: #e7e7e7;
+    --box-border-color: #f1f1f1;
+    --button-bg: #5f5f5f;
+    --button-bg-hover: #cecece;
+    --button-border-color: #c9c9c9;
+    --error-color: #e71e1e;
+    --input-border-color: #5f5f5f;
 }
 *{
     margin: 0;
@@ -31,8 +42,16 @@ input, select, label{
     margin: auto;
     border-radius: 5px;
 }
+input, select{
+    background-color: var(--main-bg-color);
+    border: 2px solid #5f5f5f;
+    color: var(--main-text-color);
+}
 label{
     text-align: center;
+}
+button{
+    color: var(--main-text-color);
 }
 /*MAIN*/
 .overflow-hidden{
@@ -77,7 +96,7 @@ label{
 }
 .box-confirm{
     display: block;
-    border: 2px solid var(--button-border);
+    border: 2px solid var(--button-border-color);
     background-color: var(--button-bg);
     padding: 4px;
     margin: 5px auto 0 auto;
@@ -122,7 +141,7 @@ label{
 .column-add-task, .nav-add-task{
     margin: 10px 0 0 0;
     height: 30px;
-    border: 2px dotted var(--button-border);
+    border: 2px dotted var(--button-border-color);
     border-radius: 15px;
     background-color: var(--button-bg);
 }
