@@ -34,15 +34,6 @@ label{
 button{
     color: var(--main-text-color);
 }
-
-.no-transitions{
-    -webkit-transition: none !important;
-    -moz-transition: none !important;
-    -ms-transition: none !important;
-    -o-transition: none !important;
-    transition: none !important;
-  }
-
 /*MAIN*/
 .overflow-hidden{
     overflow: hidden;
