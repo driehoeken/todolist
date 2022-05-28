@@ -54,6 +54,7 @@ label{
 button{
     color: var(--main-text-color);
 }
+
 /*MAIN*/
 .overflow-hidden{
     overflow: hidden;

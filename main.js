@@ -201,12 +201,24 @@ boxConfirm.addEventListener('click', () => {
 
 columnsContainer.addEventListener('click', editTask);
 columnsContainer.addEventListener('click', removeTask);
-changeTheme.addEventListener('change', () => {
+changeTheme.addEventListener('click', () => {
     body.classList.toggle('dark-theme');
+    if(changeTheme.checked){
+        localStorage.setItem('mode', 'dark');
+    }
+    else{
+        localStorage.setItem('mode', 'light');
+    }
 });
 
-//loading tasks from local storage if they exist
+//loading tasks from local localStorage if they exist
 if(localStorage.getItem('tasks') !== null){
     tasks = JSON.parse(localStorage.getItem('tasks'));
+}
+
+//setting light mode from localStorage if it does not exist or if it is set
+if(localStorage.getItem('mode') === 'dark'){
+    body.classList.toggle('dark-theme');
+    changeTheme.checked= true;
 }
 renderTasks();
