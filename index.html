@@ -14,7 +14,7 @@
         <script src="https://kit.fontawesome.com/06fd0b3ce5.js" crossorigin="anonymous"></script>
 
     </head>
-    <body class="dark-theme">
+    <body class="">
         <div class="transparent-black off"></div>
         <div class="box off">
             <p class="box-header">Add task</p>
@@ -40,7 +40,13 @@
         <div id="main-container">
             <nav>
                 <h1>Welcome!</h1>
-                <button id="change-theme"></button>
+                <label id="change-theme-label">
+                    <input type='checkbox' id='change-theme-checkbox'>
+                    <div class='change-theme'>
+                        <div class="change-theme-icon"><i class="fa-solid fa-moon"></i></div>
+                        <div class="change-theme-icon"><i class="fa-solid fa-sun"></i></div>
+                    </div>
+                </label>
                 <button class="nav-add-task add-task">Add task <i class="fa-solid fa-plus"></i></button>
             </nav>
             <div id="columns-container">

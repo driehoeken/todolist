@@ -140,7 +140,6 @@ button{
     display: flex;
 }
 .column-add-task, .nav-add-task{
-    margin: 10px 0 0 0;
     height: 30px;
     border: 2px dotted var(--button-border-color);
     border-radius: 15px;
@@ -151,6 +150,7 @@ button{
 }
 .column-add-task{
     width: 100%;
+    margin: 10px 0 0 0;
 }
 .column-top-add-task:hover{
     transform: scale(1.2);
@@ -211,6 +211,51 @@ button{
 
 .task-remove, .task-edit, .box-close{
     transition: all 0.1s ease-in-out;
+}
+
+/*Change theme checkbox*/
+
+.change-theme{
+    width: 60px;
+    height: 30px;
+    background-color: #000000;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+}
+.change-theme-icon{
+    flex: 1;
+    color: var(--main-bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.change-theme:before{
+    content: '';
+    display: block;
+    height: 24px;
+    width: 24px;
+    border-radius: 12px;
+    transform: translate(3px, 3px);
+    transition: all 0.2s ease-in-out;
+    background-color: #FFFFFF;
+    position: absolute;
+}
+#change-theme-label{
+    margin-right: 10px;
+}
+input[type="checkbox"]{
+    -webkit-appearance: none;
+    visibility: hidden;
+    display: none;
+}
+input[type="checkbox"]:checked ~ .change-theme{
+    background-color: #FFFFFF;
+}
+input[type="checkbox"]:checked ~ .change-theme:before{
+    background-color: #000000;
+    transform: translate(33px, 3px);
 }
 
 @media only screen and (max-width: 1200px) {

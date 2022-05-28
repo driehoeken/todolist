@@ -8,6 +8,6 @@ Really early version
 - removing tasks
 - saving tasks in localStorage
 - responsiveness
-### Things I'm planning to add:
 - dark mode
+### Things I'm planning to add:
 - drag and drop

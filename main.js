@@ -39,7 +39,7 @@ const inputDate = document.querySelector('#input-date');
 const inputStatus = document.querySelector('#status');
 const columnsContainer = document.querySelector('#columns-container');
 const boxError = document.querySelector('#box-error');
-const changeTheme = document.querySelector('#change-theme')
+const changeTheme = document.querySelector('#change-theme-checkbox')
 
 const statuses = ['toDo', 'doing', 'done'];
 
@@ -201,7 +201,7 @@ boxConfirm.addEventListener('click', () => {
 
 columnsContainer.addEventListener('click', editTask);
 columnsContainer.addEventListener('click', removeTask);
-changeTheme.addEventListener('click', () => {
+changeTheme.addEventListener('change', () => {
     body.classList.toggle('dark-theme');
 });
 
