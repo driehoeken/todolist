@@ -1,0 +1,10 @@
+:root{
+    --main-bg-color: #FFF;
+    --main-text-color: #000;
+    --box-border-color: #f1f1f1;
+    --button-bg: #dddddd;
+    --button-bg-hover: #b1b1b1;
+    --button-border-color: #919191;
+    --error-color: #e71e1e;
+    --input-border-color: #5f5f5f;
+}

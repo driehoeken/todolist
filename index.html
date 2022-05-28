@@ -1,5 +1,12 @@
 <html>
     <head>
+        <link id="vars" rel="stylesheet" type="text/css" href="light.css">
+        <script>
+            //setting light mode from localStorage if it does not exist or if it is set
+            if(localStorage.getItem('mode') === 'dark'){
+                document.getElementById('vars').setAttribute('href', 'dark.css');
+            }
+        </script>
         <link rel="stylesheet" type="text/css" href="style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">
@@ -15,6 +22,9 @@
 
     </head>
     <body class="">
+        <script>
+
+        </script>
         <div class="transparent-black off"></div>
         <div class="box off">
             <p class="box-header">Add task</p>
