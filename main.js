@@ -64,19 +64,7 @@ const renderTasks = function(){
     //rendering tasks
     statuses.forEach((status) => {
         tasks[status].forEach((task) => {
-            let taskDiv = document.createElement('div');
-            taskDiv.classList.add('task');
-            taskDiv.innerHTML = `
-            <div class='task-top'>
-                <p class="task-title">${task.name}</p>
-                <button class="task-edit"><i class="fa-solid fa-pen"></i></button>
-                <button class="task-remove"><i class="fa-solid fa-trash"></i></button>
-            </div>
-            <div class="task-color" style="background-color: ${task.color};"></div>
-            <div class="task-bottom">
-                <p class="task-desc">${task.desc}</p>
-                <p class="task-date">${task.date}</p>`;
-            document.querySelector(`#${status}`).appendChild(taskDiv);
+            renderTask(status, tasks[status].indexOf(task));
         });
     });
     //saving tasks in localStorage every time they are rendered
@@ -149,6 +137,32 @@ const editTask = function(e){
         showBox(true);
     }
 }
+
+const renderTask = function(status, id){
+    const tasksDivs = [...document.getElementById(status).children];
+    const searchedTask = tasksDivs[id];
+    const task = tasks[status][id];
+    console.log(searchedTask);
+    const taskInner = `
+        <div class='task-top'>
+        <p class="task-title">${task.name}</p>
+        <button class="task-edit"><i class="fa-solid fa-pen"></i></button>
+        <button class="task-remove"><i class="fa-solid fa-trash"></i></button>
+        </div>
+        <div class="task-color" style="background-color: ${task.color};"></div>
+        <div class="task-bottom">
+        <p class="task-desc">${task.desc}</p>
+        <p class="task-date">${task.date}</p>`;
+    if(searchedTask !== undefined){
+        searchedTask.innerHTML = taskInner;
+    }
+    else{
+        const newTask = document.createElement('div');
+        newTask.classList.add('task');
+        newTask.innerHTML = taskInner;
+        document.getElementById(status).appendChild(newTask);
+    }
+};
 
 addTasks.forEach((button) => {
     button.addEventListener('click', (e) => {
