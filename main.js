@@ -40,6 +40,7 @@ const inputStatus = document.querySelector('#status');
 const columnsContainer = document.querySelector('#columns-container');
 const boxError = document.querySelector('#box-error');
 const changeTheme = document.querySelector('#change-theme-checkbox')
+const tasksWrappers = document.querySelectorAll('.tasks');
 
 const statuses = ['toDo', 'doing', 'done'];
 
@@ -138,10 +139,10 @@ const editTask = function(e){
     }
 }
 
-const renderTask = function(status, id){
+const renderTask = function(status, index){
     const tasksDivs = [...document.getElementById(status).children];
-    const searchedTask = tasksDivs[id];
-    const task = tasks[status][id];
+    const searchedTask = tasksDivs[index];
+    const task = tasks[status][index];
     console.log(searchedTask);
     const taskInner = `
         <div class='task-top'>
@@ -153,12 +154,15 @@ const renderTask = function(status, id){
         <div class="task-bottom">
         <p class="task-desc">${task.desc}</p>
         <p class="task-date">${task.date}</p>`;
+    //if task at this index exist it will change only innerHTML
     if(searchedTask !== undefined){
         searchedTask.innerHTML = taskInner;
     }
+    //otherwise it will create new div
     else{
         const newTask = document.createElement('div');
-        newTask.classList.add('task');
+        newTask.classList = ('task draggable');
+        newTask.setAttribute('draggable', 'true');
         newTask.innerHTML = taskInner;
         document.getElementById(status).appendChild(newTask);
     }
@@ -213,8 +217,60 @@ boxConfirm.addEventListener('click', () => {
     hideBox();
 });
 
+const dragStart = function(e){
+    if(e.target.closest('.draggable')){
+        e.target.closest('.draggable').classList.add('dragging');
+    }
+}
+const dragEnd = function(e){
+    if(e.target.closest('.draggable')){
+        e.target.closest('.draggable').classList.remove('dragging');
+    }
+    saveTasks();
+}
+const dragOver = function(e){
+    const tasksWrapper = e.target.closest('.tasks');
+    e.preventDefault();
+    const dragging = document.querySelector('.dragging');
+    tasksWrapper.appendChild(dragging);
+}
+
 columnsContainer.addEventListener('click', editTask);
 columnsContainer.addEventListener('click', removeTask);
+columnsContainer.addEventListener('dragstart', dragStart);
+columnsContainer.addEventListener('dragend', dragEnd);
+
+const saveTasks = function(){
+    let tasksEmpty = {
+        toDo:[
+
+        ],
+        doing:[
+
+        ],
+        done:[
+    
+        ]
+    };
+    tasksWrappers.forEach((taskWrapper) => {
+        const taskDivs = [...document.getElementById(taskWrapper.id).children];
+        taskDivs.forEach((taskDiv) => {
+            const task = {
+                name: taskDiv.querySelector('.task-title').textContent,
+                color: taskDiv.querySelector('.task-color').style.backgroundColor,
+                desc: taskDiv.querySelector('.task-desc').textContent,
+                date: taskDiv.querySelector('.task-date').textContent
+            }
+            tasksEmpty[taskWrapper.id].push(task);
+        });
+        tasks = tasksEmpty;
+    });
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+tasksWrappers.forEach((tasksWrapper) => {
+    tasksWrapper.addEventListener('dragover', dragOver);
+});
 changeTheme.addEventListener('click', () => {
     
     if(changeTheme.checked){
