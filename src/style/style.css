@@ -203,7 +203,7 @@ button{
 .change-theme{
     width: 60px;
     height: 30px;
-    background-color: #000000;
+    background-color: var(--main-text-color);
     border-radius: 15px;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
@@ -224,7 +224,7 @@ button{
     border-radius: 12px;
     transform: translate(3px, 3px);
     transition: all 0.2s ease-in-out;
-    background-color: #FFFFFF;
+    background-color: var(--main-bg-color);
     position: absolute;
 }
 #change-theme-label{
@@ -236,10 +236,10 @@ input[type="checkbox"]{
     display: none;
 }
 input[type="checkbox"]:checked ~ .change-theme{
-    background-color: #FFFFFF;
+    background-color: var(--main-text-color);
 }
 input[type="checkbox"]:checked ~ .change-theme:before{
-    background-color: #000000;
+    background-color: var(--main-bg-color);
     transform: translate(33px, 3px);
 }
 
