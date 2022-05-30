@@ -9,5 +9,4 @@ Really early version
 - saving tasks in localStorage
 - responsiveness
 - dark mode
-### Things I'm planning to add:
 - drag and drop

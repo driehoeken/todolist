@@ -1,25 +1,9 @@
 let tasks = {
     toDo:[
-        {
-            name:'bsfdbfdsbf',
-            color:'#015312',
-            desc:'hahahahahha',
-            date:'15.07.22',
-        },
-        {
-            name:'34erfgdfg',
-            color:'#015312',
-            desc:'hahahahahha',
-            date:'15.07.22',
-        }
+
     ],
     doing:[
-        {
-            name:'#@Q3tgdsg',
-            color:'#078912',
-            desc:'hah3rrf3ahha',
-            date:'17.07.22',
-        }
+
     ],
     done:[
 
