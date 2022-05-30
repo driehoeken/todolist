@@ -10,3 +10,5 @@ Really early version
 - responsiveness
 - dark mode
 - drag and drop
+
+You can check it at https://driehoeken.github.io/todolist/
