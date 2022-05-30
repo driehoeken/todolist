@@ -79,7 +79,7 @@ boxConfirm.addEventListener('click', () => {
             tasks[inputStatus.value].push(taskToEdit);
             tasks[editedStatus].splice(tasks[editedStatus].indexOf(taskToEdit), 1);
         }
-        renderTasks();
+        renderTask(editedStatus, editedId);
     }
     boxError.textContent = '';
     hideBox();

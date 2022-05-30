@@ -27,7 +27,7 @@ const addTask = function(name, color, desc, date, status){
         date: date,
     }
     tasks[status].push(task);
-    renderTasks();
+    renderTask(status, tasks[status].length - 1);
 }
 const renderTasks = function(){
     //removing all tasks from DOM
@@ -99,6 +99,8 @@ const renderTask = function(status, index){
         newTask.innerHTML = taskInner;
         document.getElementById(status).appendChild(newTask);
     }
+    //saving tasks in localStorage every time task rendered
+    localStorage.setItem('tasks', JSON.stringify(tasks));
 };
 
 addTasks.forEach((button) => {
