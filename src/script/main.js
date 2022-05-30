@@ -27,19 +27,8 @@ let tasks = {
 };
 
 const addTasks = document.querySelectorAll('.add-task');
-const boxConfirm = document.querySelector('.box-confirm');
 const body = document.querySelector('body');
-const transparent = document.querySelector('.transparent-black');
-const box = document.querySelector('.box');
-const boxClose = document.querySelector('.box-close');
-const inputName = document.querySelector('#input-name');
-const inputColor = document.querySelector('#input-color');
-const inputDesc = document.querySelector('#input-desc');
-const inputDate = document.querySelector('#input-date');
-const inputStatus = document.querySelector('#status');
 const columnsContainer = document.querySelector('#columns-container');
-const boxError = document.querySelector('#box-error');
-const changeTheme = document.querySelector('#change-theme-checkbox')
 const tasksWrappers = document.querySelectorAll('.tasks');
 
 const statuses = ['toDo', 'doing', 'done'];
@@ -70,46 +59,6 @@ const renderTasks = function(){
     });
     //saving tasks in localStorage every time they are rendered
     localStorage.setItem('tasks', JSON.stringify(tasks));
-}
-
-const showBox = function(isEdit){
-    body.classList.add('overflow-hidden');
-    transparent.classList = 'transparent-black on';
-    box.classList = isEdit ? 'box on edit' : 'box on';
-    //if the box is used to edit a task it will be filled with values of task which user is editing
-    if(isEdit){
-        const editedTask = tasks[editedStatus][editedId];
-        boxConfirm.textContent = 'Edit task';
-        document.querySelector('.box-header').textContent = 'Edit task';
-
-        inputName.value = editedTask.name;
-        inputColor.value = editedTask.color;
-        inputDesc.value = editedTask.desc;
-
-        //converting date from dd.mm.yyyy to yyyy-mm-dd so we can set calendar input
-        let date = editedTask.date.split('.');
-        date = `20${date[2]}-${date[1]}-${date[0]}`;
-        inputDate.value = date;
-        inputStatus.value = editedStatus;
-    }
-}
-
-const hideBox = function(){
-    body.classList.remove('overflow-hidden');
-    transparent.classList = 'transparent-black off';
-    //if the box was used to edit a task its values will be set to basic
-    if(box.classList.contains('edit')){
-        boxConfirm.textContent = 'Add task';
-        document.querySelector('.box-header').textContent = 'Add task';
-
-        inputName.value = '';
-        inputColor.value = '#000000';
-        inputDesc.value = '';
-        inputDate.value = '';
-    }
-    inputStatus.value = 'toDo';
-    box.classList = 'box off';
-
 }
 
 const getTask = function(e){
@@ -143,7 +92,7 @@ const renderTask = function(status, index){
     const tasksDivs = [...document.getElementById(status).children];
     const searchedTask = tasksDivs[index];
     const task = tasks[status][index];
-    console.log(searchedTask);
+
     const taskInner = `
         <div class='task-top'>
         <p class="task-title">${task.name}</p>
@@ -177,68 +126,9 @@ addTasks.forEach((button) => {
         showBox(false);
     });
 });
-
-transparent.addEventListener('click', hideBox);
-boxClose.addEventListener('click', hideBox);
-boxConfirm.addEventListener('click', () => {
-
-    //converting date from yyyy-mm-dd to dd.mm.yyyy so we can set calendar input
-    let date = inputDate.value.split('-');
-    date = `${date[2]}.${date[1]}.${date[0].slice(-2)}`;
-
-    //if date is not defined
-    if(inputDate.value === ''){
-        date = '';
-    }
-    //if name is not defined
-    if(inputName.value === ''){
-        boxError.textContent = 'Set name of your task!';
-        return;
-    }
-    //if box is not used to edit, new task will be added
-    if(!box.classList.contains('edit')){
-        addTask(inputName.value, inputColor.value, inputDesc.value, date, inputStatus.value);
-    }
-    else{
-        //getting task which is edited and changing its values
-        let taskToEdit = tasks[editedStatus][editedId];
-        taskToEdit.name = inputName.value;
-        taskToEdit.color = inputColor.value;
-        taskToEdit.desc = inputDesc.value;
-        taskToEdit.date = date;
-        //if status has changed, it will push task to the new array and remove from the old one
-        if(editedStatus !== inputStatus.value){
-            tasks[inputStatus.value].push(taskToEdit);
-            tasks[editedStatus].splice(tasks[editedStatus].indexOf(taskToEdit), 1);
-        }
-        renderTasks();
-    }
-    boxError.textContent = '';
-    hideBox();
-});
-
-const dragStart = function(e){
-    if(e.target.closest('.draggable')){
-        e.target.closest('.draggable').classList.add('dragging');
-    }
-}
-const dragEnd = function(e){
-    if(e.target.closest('.draggable')){
-        e.target.closest('.draggable').classList.remove('dragging');
-    }
-    saveTasks();
-}
-const dragOver = function(e){
-    const tasksWrapper = e.target.closest('.tasks');
-    e.preventDefault();
-    const dragging = document.querySelector('.dragging');
-    tasksWrapper.appendChild(dragging);
-}
-
 columnsContainer.addEventListener('click', editTask);
 columnsContainer.addEventListener('click', removeTask);
-columnsContainer.addEventListener('dragstart', dragStart);
-columnsContainer.addEventListener('dragend', dragEnd);
+
 
 const saveTasks = function(){
     let tasksEmpty = {
@@ -257,7 +147,7 @@ const saveTasks = function(){
         taskDivs.forEach((taskDiv) => {
             const task = {
                 name: taskDiv.querySelector('.task-title').textContent,
-                color: taskDiv.querySelector('.task-color').style.backgroundColor,
+                color: taskDiv.querySelector('.task-color').getAttribute('style').replace('background-color: ', '').replace(';', ''),
                 desc: taskDiv.querySelector('.task-desc').textContent,
                 date: taskDiv.querySelector('.task-date').textContent
             }
@@ -268,23 +158,8 @@ const saveTasks = function(){
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
-tasksWrappers.forEach((tasksWrapper) => {
-    tasksWrapper.addEventListener('dragover', dragOver);
-});
-changeTheme.addEventListener('click', () => {
-    
-    if(changeTheme.checked){
-        localStorage.setItem('mode', 'dark');
-    }
-    else{
-        localStorage.setItem('mode', 'light');
-    }
-    document.getElementById('vars').setAttribute('href', `${localStorage.getItem('mode')}.css`);
-});
 
-if(localStorage.getItem('mode') === 'dark'){
-    changeTheme.checked= true;
-}
+
 //loading tasks from local localStorage if they exist
 if(localStorage.getItem('tasks') !== null){
     tasks = JSON.parse(localStorage.getItem('tasks'));
